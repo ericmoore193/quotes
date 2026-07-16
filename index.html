@@ -3,269 +3,673 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get a Quote | Eric “EJ” Moore — Clearview Insurance Agency</title>
-<meta name="description" content="Request a free insurance quote from Eric “EJ” Moore at Clearview Insurance Agency. Auto, home, life, and commercial coverage — quotes turned around fast.">
+<title>Request a Quote | Eric “EJ” Moore — Clearview Insurance Agency</title>
+<meta name="description" content="Request an insurance quote from Eric “EJ” Moore at Clearview Insurance Agency in Cedar Park, TX. Auto, home, life, and business coverage through an independent agency licensed in 40 states.">
 <meta name="theme-color" content="#073252">
 <style>
   /* ============================================================
-     DESIGN TOKENS — tweak colors/fonts here
+     DESIGN TOKENS — Clearview brand colors sampled from
+     clearviewinsurance.com + logo: navy #073252, blue #0174aa,
+     gold #fcc440 (gold = small accents only, never text on white)
      ============================================================ */
-  /* Clearview brand colors — sampled from clearviewinsurance.com + logo:
-     navy #073252, blue #0174aa, gold #fcc440 */
   :root {
     --navy: #073252;
     --navy-2: #0b4a74;
-    --accent: #0174aa;      /* Clearview blue — buttons, highlights */
-    --accent-dark: #015d89;
-    --gold: #fcc440;        /* logo's gold rule — small accents only */
-    --bg: #f3f3f7;
+    --blue: #0174aa;
+    --blue-dark: #015d89;
+    --blue-hover-border: #9fc8dd;
+    --chip-blue: #eaf4f9;
+    --chip-blue-hover: #dcedf6;
+    --chip-blue-border: #d7e8f1;
+    --chip-navy: #eaeef3;
+    --chip-navy-hover: #e0e6ee;
+    --chip-navy-border: #dde3ea;
+    --gold: #fcc440;
+    --paper: #f7f5f0;
     --card: #ffffff;
-    --text: #22303e;
-    --muted: #5c6b7a;
-    --border: #e3e9ef;
-    --radius: 14px;
-    --shadow: 0 1px 3px rgba(7, 50, 82, 0.08), 0 8px 24px rgba(7, 50, 82, 0.07);
+    --hairline: #e6e2da;
+    --ink: #22303e;
+    --body: #3d4c5a;
+    --muted: #5f6b76;
+    --serif: ui-serif, "New York", "Iowan Old Style", Georgia, "Palatino Linotype", "Times New Roman", serif;
+    --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  a { -webkit-tap-highlight-color: transparent; }
 
-  /* ---------- Header ---------- */
-  header {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
-    color: #fff;
-    padding: 56px 0 64px;
-    text-align: center;
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+  @media (min-width: 720px) { .wrap { padding: 0 24px; } }
+
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .masthead a:focus-visible, .contact-band a:focus-visible { outline-color: var(--gold); }
+  .agent-card a:focus-visible { outline-color: var(--blue); }
+
+  /* ---------- Skip link ---------- */
+  .skip {
+    position: absolute;
+    clip-path: inset(50%);
+    width: 1px; height: 1px; overflow: hidden;
   }
-  .badge {
-    display: inline-block;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: rgba(255,255,255,0.12);
-    border: 1px solid rgba(252, 196, 64, 0.6);  /* gold, like the logo's rule */
-    border-radius: 999px;
-    padding: 5px 14px;
-    margin-bottom: 18px;
-  }
-  header h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 750; letter-spacing: -0.01em; }
-  header p.sub {
-    margin-top: 12px;
-    font-size: clamp(15px, 2.5vw, 18px);
-    color: rgba(255,255,255,0.85);
-    max-width: 560px;
-    margin-left: auto; margin-right: auto;
+  .skip:focus {
+    clip-path: none;
+    width: auto; height: auto;
+    top: 8px; left: 8px; z-index: 30;
+    background: #fff; color: var(--navy);
+    padding: 12px; border-radius: 8px;
+    font-weight: 600; text-decoration: none;
   }
 
-  /* ---------- Sections & cards grid ---------- */
-  main { padding: 0 0 24px; }
-  .section-label {
-    margin: 40px 0 14px;
-    font-size: 14px;
-    font-weight: 750;
-    letter-spacing: 0.09em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  /* ---------- Sticky utility bar ---------- */
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    background: #fff;
+    border-bottom: 1px solid var(--hairline);
   }
-  .section-label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
-  .section-label.first { margin-top: 34px; }
+  .bar-inner {
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .lockup { line-height: 1.15; }
+  .lockup-top { display: block; font-size: 19px; font-weight: 800; letter-spacing: 0.02em; }
+  .lk-clear { color: var(--navy); }
+  .lk-view { color: var(--blue); }
+  .lockup-sub {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.42em;
+    text-transform: uppercase; color: var(--blue);
+  }
+  .lk-rule { display: inline-block; width: 56px; height: 2px; background: var(--gold); }
+  .bar-tel {
+    display: flex; align-items: center; gap: 8px;
+    color: var(--navy); text-decoration: none;
+    font-size: 14px; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    transition: color 160ms ease-out;
+  }
+  .bar-tel:hover { color: var(--navy-2); text-decoration: underline; text-underline-offset: 2px; }
+  .bar-tel svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .tel-short { display: none; }
 
-  .grid {
+  /* ---------- Navy masthead ---------- */
+  .masthead {
+    background: var(--navy);
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
+    grid-template-columns: 7fr 5fr;
+    gap: 48px;
+    padding-top: 64px;
   }
+  .hero-text { padding-bottom: 40px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 5.5vw, 50px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    color: #fff;
+    margin-top: 16px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2.2vw, 19px);
+    line-height: 1.6;
+    color: rgba(255,255,255,0.88);
+    max-width: 38ch;
+    margin-top: 16px;
+  }
+
+  /* The business card — overlaps the gold rule into the steps band */
+  .agent-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(7, 50, 82, 0.18);
+    padding: 24px;
+    align-self: end;
+    position: relative;
+    margin-bottom: -56px;
+  }
+  .identity { display: flex; align-items: center; gap: 14px; }
+  .avatar {
+    width: 56px; height: 56px; flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    color: #fff;
+    font-family: var(--serif);
+    font-size: 22px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .identity-name { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .identity-role { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .agent-card hr {
+    border: none; border-top: 1px solid var(--hairline);
+    margin: 16px 0;
+  }
+  .reassure { font-size: 14px; color: var(--body); line-height: 1.5; }
+  .agent-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+
+  .btn {
+    height: 48px;
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    border-radius: 10px;
+    font-size: 15px; font-weight: 600;
+    text-decoration: none;
+    font-variant-numeric: tabular-nums;
+    transition: background 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out;
+  }
+  .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .btn:active { transform: translateY(1px); }
+  .btn-solid { background: var(--blue); color: #fff; }
+  .btn-solid:hover { background: var(--blue-dark); }
+  .btn-ghost { border: 1.5px solid var(--blue); color: var(--blue); }
+  .btn-ghost:hover { background: var(--chip-blue); }
+  .btn-ghost-inv { border: 1.5px solid rgba(255,255,255,0.6); color: #fff; }
+  .btn-ghost-inv:hover { background: rgba(255,255,255,0.1); }
+
+  /* ---------- Steps band ---------- */
+  .steps-band {
+    background: #fff;
+    border-bottom: 1px solid var(--hairline);
+    padding: 88px 0 48px;
+  }
+  .steps-band h2 {
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 700; color: var(--navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .step { padding: 0 32px; }
+  .step:first-child { padding-left: 0; }
+  .step:last-child { padding-right: 0; }
+  .step + .step { border-left: 1px solid var(--hairline); }
+  .step-num {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--gold);
+    color: var(--blue);
+    font-family: var(--serif);
+    font-size: 26px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h3 { font-size: 16px; font-weight: 600; color: var(--navy); margin-top: 12px; }
+  .step p { font-size: 14.5px; line-height: 1.55; color: var(--muted); margin-top: 4px; }
+
+  /* ---------- Section header pattern ---------- */
+  .section { margin-top: 64px; }
+  .kicker { display: block; width: 40px; height: 3px; background: var(--gold); margin-bottom: 12px; }
+  .section h2 {
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+  .section-sub { font-size: 15px; color: var(--muted); margin-top: 6px; }
+  .section-head { margin-bottom: 28px; }
+
+  /* ---------- Coverage cards ---------- */
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-business { grid-template-columns: repeat(2, 1fr); max-width: 680px; }
   .card {
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 26px 24px 24px;
-    display: flex;
-    flex-direction: column;
-  }
-  .card .icon { font-size: 30px; line-height: 1; margin-bottom: 12px; }
-  .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 6px; }
-  .card p { font-size: 14.5px; color: var(--muted); flex: 1; margin-bottom: 18px; }
-  .card a.btn {
-    display: block;
-    text-align: center;
-    background: var(--accent);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 650;
-    font-size: 15px;
-    padding: 12px 16px;
+    border: 1px solid var(--hairline);
     border-radius: 10px;
-    transition: background 0.15s ease, transform 0.1s ease;
+    padding: 24px;
+    display: flex; flex-direction: column;
+    position: relative;
+    transition: transform 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
   }
-  .card a.btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
-  .card a.btn:active { transform: translateY(0); }
-
-  /* ---------- Trust strip ---------- */
-  .trust {
-    margin: 36px 0 0;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px 34px;
-    justify-content: center;
-    font-size: 14.5px;
-    color: var(--muted);
+  .chip {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 160ms ease-out;
   }
-  .trust span strong { color: var(--text); }
-
-  /* ---------- Contact ---------- */
-  .contact {
-    margin: 36px 0 0;
-    text-align: center;
-  }
-  .contact h2 { font-size: 22px; margin-bottom: 8px; }
-  .contact p { color: var(--muted); font-size: 15.5px; }
-  .contact .row { margin-top: 14px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .contact a.pill {
-    display: inline-block;
-    border: 1.5px solid var(--accent);
-    color: var(--accent-dark);
+  .chip svg { width: 26px; height: 26px; }
+  .chip-p { background: var(--chip-blue); border: 1px solid var(--chip-blue-border); }
+  .chip-b { background: var(--chip-navy); border: 1px solid var(--chip-navy-border); }
+  .card-body { flex: 1; display: flex; flex-direction: column; }
+  .card h3 { font-size: 17px; font-weight: 700; color: var(--navy); margin-top: 14px; }
+  .card p { font-size: 15px; line-height: 1.55; color: var(--body); margin-top: 6px; flex: 1; }
+  .cta {
+    display: flex; align-items: center; gap: 7px;
+    margin-top: 18px;
+    color: var(--blue);
+    font-size: 15px; font-weight: 600;
     text-decoration: none;
-    font-weight: 650;
-    font-size: 15px;
-    padding: 10px 22px;
-    border-radius: 999px;
-    transition: background 0.15s ease, color 0.15s ease;
   }
-  .contact a.pill:hover { background: var(--accent); color: #fff; }
+  .cta::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+  .cta .arrow { width: 12px; height: 12px; transition: transform 160ms ease-out; }
+  .chev { display: none; width: 18px; height: 18px; color: var(--blue); flex-shrink: 0; align-self: center; }
+  @media (hover: hover) {
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--blue-hover-border);
+      box-shadow: 0 10px 24px rgba(7, 50, 82, 0.10);
+    }
+    .card:hover .chip-p { background: var(--chip-blue-hover); }
+    .card:hover .chip-b { background: var(--chip-navy-hover); }
+    .card:hover .arrow { transform: translateX(3px); }
+    .card:active { transform: translateY(0); box-shadow: none; }
+  }
+  .card:focus-within { border-color: var(--blue-hover-border); }
 
+  /* ---------- A note from EJ ---------- */
+  .note {
+    margin-top: 72px;
+    max-width: 640px;
+    border-left: 3px solid var(--gold);
+    padding-left: 28px;
+  }
+  .note h2 { font-family: var(--serif); font-size: 24px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+  .note-body { display: flex; gap: 16px; margin-top: 16px; align-items: flex-start; }
+  .avatar-sm { width: 40px; height: 40px; font-size: 16px; }
+  .note-text p {
+    font-family: var(--serif);
+    font-size: 19px; line-height: 1.65;
+    color: var(--ink);
+  }
+  .signoff {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--navy);
+    margin-top: 12px;
+  }
+
+  /* ---------- Contact band ---------- */
+  .contact-band {
+    background: var(--navy);
+    margin-top: 72px;
+    padding: 64px 0;
+  }
+  .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .contact-band h2 {
+    font-family: var(--serif);
+    font-size: 26px; font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+  .contact-band .lead {
+    font-size: 16px; line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    max-width: 52ch;
+    margin-top: 8px;
+  }
+  .contact-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; min-width: 320px; }
+  .contact-actions .btn { padding: 0 22px; }
+
+  /* ---------- Footer ---------- */
   footer {
-    margin-top: 48px;
-    padding: 26px 20px 34px;
-    text-align: center;
-    font-size: 13px;
+    border-top: 1px solid var(--hairline);
+    padding: 40px 0 48px;
+    font-size: 13px; line-height: 1.7;
     color: var(--muted);
-    border-top: 1px solid var(--border);
+  }
+  footer span { display: block; }
+
+  /* ---------- Reveal (JS-gated; page fully visible without JS) ---------- */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 400ms ease-out, transform 400ms ease-out;
+    transition-delay: calc(var(--i, 0) * 45ms);
+  }
+  html.js .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 0; padding-top: 48px; }
+    .hero-text { padding-bottom: 32px; }
+    .agent-card { margin-bottom: -40px; }
+    .steps-band { padding: 72px 0 40px; }
+  }
+  @media (max-width: 720px) {
+    .steps { grid-template-columns: 1fr; gap: 20px; }
+    .step { padding: 0; display: flex; gap: 16px; align-items: flex-start; }
+    .step + .step { border-left: none; }
+    .step-text h3 { margin-top: 2px; }
+    .section { margin-top: 48px; }
+    .section h2 { font-size: 24px; }
+    .grid, .grid-business { grid-template-columns: 1fr; gap: 12px; max-width: none; }
+    .card { flex-direction: row; align-items: flex-start; gap: 14px; padding: 16px; min-height: 72px; }
+    .card h3 { margin-top: 0; font-size: 16px; }
+    .card p { font-size: 14px; line-height: 1.5; margin-top: 2px; flex: none; }
+    .cta { margin: 0; }
+    .cta .arrow { display: none; }
+    .cta .cta-label {
+      position: absolute;
+      clip-path: inset(50%);
+      width: 1px; height: 1px; overflow: hidden;
+    }
+    .chev { display: block; }
+    .note { margin-top: 56px; padding-left: 20px; }
+    .note-text p { font-size: 17px; }
+    .contact-band { padding: 48px 0; }
+    .contact-inner { flex-direction: column; align-items: stretch; }
+    .contact-actions { min-width: 0; }
+    footer { text-align: center; }
+  }
+  @media (max-width: 480px) {
+    .bar-inner { height: 56px; }
+    .tel-full { display: none; }
+    .tel-short { display: inline; }
+  }
+  @media (max-width: 380px) {
+    .btn-email { font-size: 13.5px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; animation: none !important; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="badge">Clearview Insurance Agency</div>
-    <h1>Get Your Free Insurance Quote</h1>
-    <p class="sub">Pick the coverage you need below, answer a few quick questions, and I'll shop it across multiple carriers — usually same day.</p>
+<a class="skip" href="#main">Skip to coverage options</a>
+
+<!-- ============================================================
+     STICKY UTILITY BAR — wordmark + phone
+     ============================================================ -->
+<header class="bar">
+  <div class="wrap bar-inner">
+    <div class="lockup">
+      <span class="lockup-top"><span class="lk-clear">CLEAR</span><span class="lk-view">VIEW</span></span>
+      <span class="lockup-sub">Insurance<i class="lk-rule" aria-hidden="true"></i></span>
+    </div>
+    <a class="bar-tel" href="tel:+15127291108">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="tel-full">Call or text (512) 729-1108</span>
+      <span class="tel-short">(512) 729-1108</span>
+    </a>
   </div>
 </header>
 
-<main class="wrap">
+<!-- ============================================================
+     MASTHEAD — flat navy, gold rule, overlapping business card
+     ============================================================ -->
+<section class="masthead">
+  <div class="wrap hero">
+    <div class="hero-text">
+      <p class="eyebrow">Independent Insurance Agency &middot; Cedar Park, Texas</p>
+      <h1>Let&rsquo;s find you the right coverage.</h1>
+      <p class="hero-sub">I&rsquo;m EJ Moore with Clearview Insurance. Pick a coverage type below, answer a few quick questions, and I&rsquo;ll shop your request across our carriers and follow up personally &mdash; usually the same day.</p>
+    </div>
+    <div class="agent-card">
+      <div class="identity">
+        <span class="avatar" aria-hidden="true">EJ</span>
+        <div>
+          <div class="identity-name">Eric “EJ” Moore</div>
+          <div class="identity-role">Customer Sales Representative<br>Clearview Insurance Agency &middot; Cedar Park, TX</div>
+        </div>
+      </div>
+      <hr>
+      <p class="reassure">Your quote request comes straight to me &mdash; not a call center.</p>
+      <div class="agent-actions">
+        <a class="btn btn-solid" href="tel:+15127291108">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call or text
+        </a>
+        <a class="btn btn-ghost" href="mailto:ericmoore@clearviewinsurance.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email EJ
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main id="main">
 
   <!-- ============================================================
-       QUOTE LINK CARDS
-       Each card = one quote form. To update a link, change the href.
-       To add a card, copy a whole <div class="card">...</div> block.
-       To remove one, delete the block.
+       STEPS BAND — what happens after you click
        ============================================================ -->
-
-  <div class="section-label first">Personal Coverage</div>
-  <div class="grid">
-
-    <div class="card">
-      <div class="icon">🚗</div>
-      <h3>Personal Auto</h3>
-      <p>Cars, trucks, and everything you drive. Multi-vehicle and bundle discounts available.</p>
-      <a class="btn" href="https://cv-insurance.co/quote-page?agent_name=Eric" target="_blank" rel="noopener">Start Auto Quote</a>
+  <div class="steps-band">
+    <div class="wrap">
+      <h2>What happens after you click</h2>
+      <div class="steps">
+        <div class="step reveal" style="--i:0">
+          <div class="step-num" aria-hidden="true">1</div>
+          <div class="step-text">
+            <h3>Pick your coverage</h3>
+            <p>Each option below opens a short quote form in a new tab.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:1">
+          <div class="step-num" aria-hidden="true">2</div>
+          <div class="step-text">
+            <h3>Answer a few questions</h3>
+            <p>About three minutes. No payment details, no obligation.</p>
+          </div>
+        </div>
+        <div class="step reveal" style="--i:2">
+          <div class="step-num" aria-hidden="true">3</div>
+          <div class="step-text">
+            <h3>I take it from there</h3>
+            <p>I shop your request across our carriers and follow up personally, usually the same day.</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="icon">🏠</div>
-      <h3>Homeowners</h3>
-      <p>Coverage for your house and everything in it — including hard-to-place properties.</p>
-      <a class="btn" href="https://cv-insurance.co/homeowner-quote-page?agent_name=Eric" target="_blank" rel="noopener">Start Home Quote</a>
-    </div>
+  <div class="wrap">
 
-    <div class="card">
-      <div class="icon">🛡️</div>
-      <h3>Life Insurance</h3>
-      <p>Term and permanent options to protect the people who count on you.</p>
-      <a class="btn" href="https://cv-insurance.co/life-insurance-form?agent_name=Eric" target="_blank" rel="noopener">Start Life Quote</a>
-    </div>
+    <!-- ============================================================
+         COVERAGE CARDS
+         Each card = one quote form. To update a link, change the
+         href on the card's <a class="cta">. To add a card, copy a
+         whole <div class="card">...</div> block.
+         ============================================================ -->
+
+    <section class="section" aria-labelledby="personal-h">
+      <div class="section-head">
+        <span class="kicker" aria-hidden="true"></span>
+        <h2 id="personal-h">Personal coverage</h2>
+        <p class="section-sub">For your car, your home, and the people who count on you.</p>
+      </div>
+      <div class="grid">
+
+        <div class="card reveal" style="--i:0">
+          <span class="chip chip-p" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/><circle cx="20.4" cy="12.8" r="1.2" fill="#fcc440" stroke="none"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Personal Auto</h3>
+            <p>Coverage for whatever's in the driveway, with multi-vehicle and home-and-auto bundle options.</p>
+            <a class="cta" href="https://cv-insurance.co/quote-page?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start an auto quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <div class="card reveal" style="--i:1">
+          <span class="chip chip-p" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M17 6V3h2v4.5"/><rect x="10" y="15" width="4" height="7" rx="0.5" fill="#fcc440" stroke="none"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Homeowners</h3>
+            <p>New purchase, a better renewal, or a hard-to-place property. Closing on a house? Put your closing date in the form and I'll work around it.</p>
+            <a class="cta" href="https://cv-insurance.co/homeowner-quote-page?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a home quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <div class="card reveal" style="--i:2">
+          <span class="chip chip-p" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0z"/><path d="M12 12v6.5a2.5 2.5 0 0 0 5 0"/><circle cx="12" cy="1.9" r="1.1" fill="#fcc440" stroke="none"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Life Insurance</h3>
+            <p>Term and permanent options, sized to your family and your budget. Most folks start with a simple term quote.</p>
+            <a class="cta" href="https://cv-insurance.co/life-insurance-form?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a life quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="business-h">
+      <div class="section-head">
+        <span class="kicker" aria-hidden="true"></span>
+        <h2 id="business-h">Business coverage</h2>
+        <p class="section-sub">For owners, contractors, and the crews that keep them running.</p>
+      </div>
+      <div class="grid grid-business">
+
+        <div class="card reveal" style="--i:0">
+          <span class="chip chip-b" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><circle cx="21.9" cy="14.3" r="1.1" fill="#fcc440" stroke="none"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Commercial Auto</h3>
+            <p>Work trucks, vans, box trucks, and small fleets. Anything with your business name on the door.</p>
+            <a class="cta" href="https://cv-insurance.co/commercialauto-quote-page?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a commercial auto quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <div class="card reveal" style="--i:1">
+          <span class="chip chip-b" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l1.6-3.5h14.8L21 7"/><path d="M3 7a3 1.6 0 0 0 6 0a3 1.6 0 0 0 6 0a3 1.6 0 0 0 6 0"/><path d="M9 7a3 1.6 0 0 0 6 0z" fill="#fcc440" stroke="none"/><path d="M4.5 9.5V20a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1V9.5"/><path d="M9.5 21v-5a1.2 1.2 0 0 1 1.2-1.2h2.6a1.2 1.2 0 0 1 1.2 1.2v5"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Commercial Insurance</h3>
+            <p>Property, BOP, and package policies for storefronts, shops, and offices.</p>
+            <a class="cta" href="https://cv-insurance.co/commercialinsurance-quote?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a business quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <div class="card reveal" style="--i:2">
+          <span class="chip chip-b" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M8.8 11.8l2.3 2.3 4.3-4.6" stroke="#fcc440" stroke-width="2"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>General Liability</h3>
+            <p>For contractors, cleaners, and service pros. Often the certificate a contract or landlord is asking you for.</p>
+            <a class="cta" href="https://cv-insurance.co/general_liability_quote-page?agent_name=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a liability quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+        <div class="card reveal" style="--i:3">
+          <span class="chip chip-b" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/><circle cx="12" cy="2.9" r="1.05" fill="#fcc440" stroke="none"/></svg>
+          </span>
+          <div class="card-body">
+            <h3>Workers' Comp</h3>
+            <p>Required in most states once you have employees. Quotes for crews of any size, from your first hire up.</p>
+            <a class="cta" href="https://cv-insurance.co/workerscomp-quote-page?agent=Eric" target="_blank" rel="noopener">
+              <span class="cta-label">Start a workers' comp quote</span>
+              <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+          </div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         A NOTE FROM EJ
+         ============================================================ -->
+    <section class="note reveal" aria-labelledby="note-h">
+      <h2 id="note-h">A note from EJ</h2>
+      <div class="note-body">
+        <span class="avatar avatar-sm" aria-hidden="true">EJ</span>
+        <div class="note-text">
+          <p>Insurance is one of those things you buy hoping you'll never need it. My job is to help you understand exactly what you're buying, so there are no surprises later. Send a quote request through, or just call. Either way, you'll get a person, not a queue.</p>
+          <p class="signoff">&mdash; Eric “EJ” Moore</p>
+        </div>
+      </div>
+    </section>
 
   </div>
 
-  <div class="section-label">Business Coverage</div>
-  <div class="grid">
-
-    <div class="card">
-      <div class="icon">🚚</div>
-      <h3>Commercial Auto</h3>
-      <p>Work trucks, vans, and fleets — keep your vehicles earning, not waiting.</p>
-      <a class="btn" href="https://cv-insurance.co/commercialauto-quote-page?agent_name=Eric" target="_blank" rel="noopener">Start Commercial Auto Quote</a>
+  <!-- ============================================================
+       CONTACT BAND
+       ============================================================ -->
+  <section class="contact-band" aria-labelledby="contact-h">
+    <div class="wrap contact-inner reveal">
+      <div>
+        <h2 id="contact-h">Not sure which one you need?</h2>
+        <p class="lead">That's what I'm here for. Call, text, or email and tell me what's going on. I'll point you toward the right coverage.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-solid" href="tel:+15127291108">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call or text (512) 729-1108
+        </a>
+        <a class="btn btn-ghost-inv btn-email" href="mailto:ericmoore@clearviewinsurance.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          ericmoore@clearviewinsurance.com
+        </a>
+      </div>
     </div>
-
-    <div class="card">
-      <div class="icon">🏢</div>
-      <h3>Commercial Insurance</h3>
-      <p>Property, BOP, and package policies for your business — big or small.</p>
-      <a class="btn" href="https://cv-insurance.co/commercialinsurance-quote?agent_name=Eric" target="_blank" rel="noopener">Start Business Quote</a>
-    </div>
-
-    <div class="card">
-      <div class="icon">⚖️</div>
-      <h3>General Liability</h3>
-      <p>Protection against third-party claims — a must for contractors and service businesses.</p>
-      <a class="btn" href="https://cv-insurance.co/general_liability_quote-page?agent_name=Eric" target="_blank" rel="noopener">Start Liability Quote</a>
-    </div>
-
-    <div class="card">
-      <div class="icon">👷</div>
-      <h3>Workers' Comp</h3>
-      <p>Cover your team and stay compliant — quotes for crews of any size.</p>
-      <a class="btn" href="https://cv-insurance.co/workerscomp-quote-page?agent=Eric" target="_blank" rel="noopener">Start Workers' Comp Quote</a>
-    </div>
-
-  </div>
-
-  <!-- ---------- Trust strip ---------- -->
-  <div class="trust">
-    <span>✅ <strong>Multiple carriers</strong> — one form, several quotes</span>
-    <span>⚡ <strong>Fast turnaround</strong> — most quotes same day</span>
-    <span>💬 <strong>A real person</strong> — questions answered directly</span>
-  </div>
-
-  <!-- ---------- Contact ---------- -->
-  <div class="contact">
-    <h2>Rather just talk to me?</h2>
-    <p>Call, text, or email — I'll take it from there.</p>
-    <div class="row">
-      <a class="pill" href="tel:+15127291108">📞 Call or Text (512) 729-1108</a>
-      <a class="pill" href="mailto:ericmoore@clearviewinsurance.com">✉️ Email Me</a>
-    </div>
-  </div>
+  </section>
 
 </main>
 
 <footer>
-  Eric “EJ” Moore · Clearview Insurance Agency LLC · Cedar Park, TX<br>
-  <!-- Optional: add your TX license number below once issued. Not required —
-       TX ad rules (28 TAC Subch. B) accept full licensed name OR license number
-       for identification, and the name above covers it. The number just makes
-       you verifiable on TDI's license lookup — a nice trust signal. -->
-  <span id="license-line"></span>
+  <div class="wrap">
+    <span>Eric “EJ” Moore &middot; Clearview Insurance Agency LLC &middot; Cedar Park, Texas</span>
+    <span>An independent agency headquartered in Uniondale, NY, serving clients in 40 states.</span>
+    <!-- Optional: add your TX license number below once issued. Not required —
+         TX ad rules (28 TAC Subch. B) accept full licensed name OR license number
+         for identification, and the name above covers it. The number just makes
+         you verifiable on TDI's license lookup — a nice trust signal. -->
+    <span id="license-line"></span>
+  </div>
 </footer>
+
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('js');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    }
+  })();
+</script>
 
 </body>
 </html>
