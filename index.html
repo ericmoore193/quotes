@@ -6,6 +6,11 @@
 <title>Request a Quote | Eric “EJ” Moore — Clearview Insurance Agency</title>
 <meta name="description" content="Request an insurance quote from Eric “EJ” Moore at Clearview Insurance Agency in Cedar Park, TX. Auto, home, life, and business coverage through an independent agency licensed in 40 states.">
 <meta name="theme-color" content="#073252">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Request a Quote | Eric “EJ” Moore — Clearview Insurance Agency">
+<meta property="og:description" content="Auto, home, life, and business insurance quotes through Clearview Insurance Agency in Cedar Park, TX. Pick a coverage type and EJ takes it from there.">
+<meta property="og:url" content="https://ericmoore193.github.io/quotes/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23073252'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23ffffff'%3EEJ%3C/text%3E%3Crect x='18' y='48' width='28' height='4' rx='2' fill='%23fcc440'/%3E%3C/svg%3E">
 <style>
   /* ============================================================
      DESIGN TOKENS — Clearview brand colors sampled from
@@ -156,13 +161,15 @@
     display: flex; align-items: center; justify-content: center;
   }
   .identity-name { font-size: 17px; font-weight: 700; color: var(--navy); }
-  .identity-role { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .identity-role { font-size: 14px; color: var(--muted); line-height: 1.45; }
   .agent-card hr {
     border: none; border-top: 1px solid var(--hairline);
     margin: 16px 0;
   }
   .reassure { font-size: 14px; color: var(--body); line-height: 1.5; }
   .agent-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  .btn-row { display: flex; gap: 12px; }
+  .btn-row .btn { flex: 1; }
 
   .btn {
     height: 48px;
@@ -226,7 +233,7 @@
 
   /* ---------- Coverage cards ---------- */
   .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .grid-business { grid-template-columns: repeat(2, 1fr); max-width: 680px; }
+  .grid-business { grid-template-columns: repeat(2, 1fr); }
   .card {
     background: var(--card);
     border: 1px solid var(--hairline);
@@ -324,6 +331,8 @@
     color: var(--muted);
   }
   footer span { display: block; }
+  footer a { color: var(--blue); text-decoration: none; }
+  footer a:hover { text-decoration: underline; text-underline-offset: 2px; }
 
   /* ---------- Reveal (JS-gated; page fully visible without JS) ---------- */
   html.js .reveal {
@@ -339,27 +348,22 @@
     .hero { grid-template-columns: 1fr; gap: 0; padding-top: 48px; }
     .hero-text { padding-bottom: 32px; }
     .agent-card { margin-bottom: -40px; }
-    .steps-band { padding: 72px 0 40px; }
-  }
-  @media (max-width: 720px) {
-    .steps { grid-template-columns: 1fr; gap: 20px; }
+    .steps-band { padding: 64px 0 36px; }
+    .steps { grid-template-columns: 1fr; gap: 16px; }
     .step { padding: 0; display: flex; gap: 16px; align-items: flex-start; }
     .step + .step { border-left: none; }
     .step-text h3 { margin-top: 2px; }
-    .section { margin-top: 48px; }
-    .section h2 { font-size: 24px; }
-    .grid, .grid-business { grid-template-columns: 1fr; gap: 12px; max-width: none; }
+    .grid, .grid-business { grid-template-columns: 1fr; gap: 12px; }
     .card { flex-direction: row; align-items: flex-start; gap: 14px; padding: 16px; min-height: 72px; }
     .card h3 { margin-top: 0; font-size: 16px; }
-    .card p { font-size: 14px; line-height: 1.5; margin-top: 2px; flex: none; }
-    .cta { margin: 0; }
+    .card p { font-size: 15px; line-height: 1.5; margin-top: 2px; flex: none; }
+    .cta { margin-top: 8px; font-size: 14.5px; }
     .cta .arrow { display: none; }
-    .cta .cta-label {
-      position: absolute;
-      clip-path: inset(50%);
-      width: 1px; height: 1px; overflow: hidden;
-    }
     .chev { display: block; }
+  }
+  @media (max-width: 720px) {
+    .section { margin-top: 48px; }
+    .section h2 { font-size: 24px; }
     .note { margin-top: 56px; padding-left: 20px; }
     .note-text p { font-size: 17px; }
     .contact-band { padding: 48px 0; }
@@ -407,8 +411,8 @@
 <section class="masthead">
   <div class="wrap hero">
     <div class="hero-text">
-      <p class="eyebrow">Independent Insurance Agency &middot; Cedar Park, Texas</p>
-      <h1>Let&rsquo;s find you the right coverage.</h1>
+      <p class="eyebrow">Independent Insurance Agency &middot;&nbsp;Cedar Park, Texas</p>
+      <h1>Let&rsquo;s find you the right&nbsp;coverage.</h1>
       <p class="hero-sub">I&rsquo;m EJ Moore with Clearview Insurance. Pick a coverage type below, answer a few quick questions, and I&rsquo;ll shop your request across our carriers and follow up personally &mdash; usually the same day.</p>
     </div>
     <div class="agent-card">
@@ -422,10 +426,16 @@
       <hr>
       <p class="reassure">Your quote request comes straight to me &mdash; not a call center.</p>
       <div class="agent-actions">
-        <a class="btn btn-solid" href="tel:+15127291108">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Call or text
-        </a>
+        <div class="btn-row">
+          <a class="btn btn-solid" href="tel:+15127291108">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>
+          <a class="btn btn-solid" href="sms:+15127291108">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.38 8.38 0 0 1 8.5-8.5h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Text
+          </a>
+        </div>
         <a class="btn btn-ghost" href="mailto:ericmoore@clearviewinsurance.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Email EJ
@@ -442,27 +452,27 @@
        ============================================================ -->
   <div class="steps-band">
     <div class="wrap">
-      <h2>What happens after you click</h2>
+      <h2>What happens after you pick one</h2>
       <div class="steps">
-        <div class="step reveal" style="--i:0">
+        <div class="step">
           <div class="step-num" aria-hidden="true">1</div>
           <div class="step-text">
             <h3>Pick your coverage</h3>
-            <p>Each option below opens a short quote form in a new tab.</p>
+            <p>Each option below opens a short quote form in a new tab on cv-insurance.co, Clearview's quote site.</p>
           </div>
         </div>
-        <div class="step reveal" style="--i:1">
+        <div class="step">
           <div class="step-num" aria-hidden="true">2</div>
           <div class="step-text">
             <h3>Answer a few questions</h3>
-            <p>About three minutes. No payment details, no obligation.</p>
+            <p>Quick basics about you and what you're covering. No payment details, no obligation.</p>
           </div>
         </div>
-        <div class="step reveal" style="--i:2">
+        <div class="step">
           <div class="step-num" aria-hidden="true">3</div>
           <div class="step-text">
             <h3>I take it from there</h3>
-            <p>I shop your request across our carriers and follow up personally, usually the same day.</p>
+            <p>I compare the quotes our carriers return and walk you through your options.</p>
           </div>
         </div>
       </div>
@@ -488,7 +498,7 @@
 
         <div class="card reveal" style="--i:0">
           <span class="chip chip-p" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/><circle cx="20.4" cy="12.8" r="1.2" fill="#fcc440" stroke="none"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(-1.8 -2.4) scale(1.15)"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/><rect x="20.1" y="11.6" width="1.9" height="2.6" rx="0.95" fill="#fcc440" stroke="none"/></g></svg>
           </span>
           <div class="card-body">
             <h3>Personal Auto</h3>
@@ -503,11 +513,11 @@
 
         <div class="card reveal" style="--i:1">
           <span class="chip chip-p" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M17 6V3h2v4.5"/><rect x="10" y="15" width="4" height="7" rx="0.5" fill="#fcc440" stroke="none"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M17 6V3h2v4.5"/><rect x="10.5" y="16" width="3" height="5.5" rx="0.5" fill="#fcc440" stroke="none"/></svg>
           </span>
           <div class="card-body">
             <h3>Homeowners</h3>
-            <p>New purchase, a better renewal, or a hard-to-place property. Closing on a house? Put your closing date in the form and I'll work around it.</p>
+            <p>New purchase, a better renewal, or a home other companies have turned down. Closing on a house? Put your closing date in the form and I'll work around it.</p>
             <a class="cta" href="https://cv-insurance.co/homeowner-quote-page?agent_name=Eric" target="_blank" rel="noopener">
               <span class="cta-label">Start a home quote</span>
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -518,7 +528,7 @@
 
         <div class="card reveal" style="--i:2">
           <span class="chip chip-p" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 12a11.05 11.05 0 0 0-22 0z"/><path d="M12 12v6.5a2.5 2.5 0 0 0 5 0"/><circle cx="12" cy="1.9" r="1.1" fill="#fcc440" stroke="none"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="#fcc440"/><path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="#fcc440"/></svg>
           </span>
           <div class="card-body">
             <h3>Life Insurance</h3>
@@ -544,7 +554,7 @@
 
         <div class="card reveal" style="--i:0">
           <span class="chip chip-b" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><circle cx="21.9" cy="14.3" r="1.1" fill="#fcc440" stroke="none"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/><rect x="3.5" y="5.5" width="3.2" height="3.2" rx="0.6" fill="#fcc440" stroke="none"/></svg>
           </span>
           <div class="card-body">
             <h3>Commercial Auto</h3>
@@ -563,7 +573,7 @@
           </span>
           <div class="card-body">
             <h3>Commercial Insurance</h3>
-            <p>Property, BOP, and package policies for storefronts, shops, and offices.</p>
+            <p>Property coverage, business owner's policies, and package policies for storefronts, shops, and offices.</p>
             <a class="cta" href="https://cv-insurance.co/commercialinsurance-quote?agent_name=Eric" target="_blank" rel="noopener">
               <span class="cta-label">Start a business quote</span>
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -578,7 +588,7 @@
           </span>
           <div class="card-body">
             <h3>General Liability</h3>
-            <p>For contractors, cleaners, and service pros. Often the certificate a contract or landlord is asking you for.</p>
+            <p>For contractors, cleaners, and service pros. Often the certificate a landlord or contract asks for.</p>
             <a class="cta" href="https://cv-insurance.co/general_liability_quote-page?agent_name=Eric" target="_blank" rel="noopener">
               <span class="cta-label">Start a liability quote</span>
               <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -589,7 +599,7 @@
 
         <div class="card reveal" style="--i:3">
           <span class="chip chip-b" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/><circle cx="12" cy="2.9" r="1.05" fill="#fcc440" stroke="none"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#073252" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><path d="M14 6a6 6 0 0 1 6 6v3"/><circle cx="12" cy="2.9" r="1.5" fill="#fcc440" stroke="none"/></svg>
           </span>
           <div class="card-body">
             <h3>Workers' Comp</h3>
@@ -608,7 +618,7 @@
     <!-- ============================================================
          A NOTE FROM EJ
          ============================================================ -->
-    <section class="note reveal" aria-labelledby="note-h">
+    <section class="note" aria-labelledby="note-h">
       <h2 id="note-h">A note from EJ</h2>
       <div class="note-body">
         <span class="avatar avatar-sm" aria-hidden="true">EJ</span>
@@ -625,7 +635,7 @@
        CONTACT BAND
        ============================================================ -->
   <section class="contact-band" aria-labelledby="contact-h">
-    <div class="wrap contact-inner reveal">
+    <div class="wrap contact-inner">
       <div>
         <h2 id="contact-h">Not sure which one you need?</h2>
         <p class="lead">That's what I'm here for. Call, text, or email and tell me what's going on. I'll point you toward the right coverage.</p>
@@ -633,7 +643,11 @@
       <div class="contact-actions">
         <a class="btn btn-solid" href="tel:+15127291108">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Call or text (512) 729-1108
+          Call (512) 729-1108
+        </a>
+        <a class="btn btn-solid" href="sms:+15127291108">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.38 8.38 0 0 1 8.5-8.5h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Text (512) 729-1108
         </a>
         <a class="btn btn-ghost-inv btn-email" href="mailto:ericmoore@clearviewinsurance.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -649,6 +663,7 @@
   <div class="wrap">
     <span>Eric “EJ” Moore &middot; Clearview Insurance Agency LLC &middot; Cedar Park, Texas</span>
     <span>An independent agency headquartered in Uniondale, NY, serving clients in 40 states.</span>
+    <span>Agency website: <a href="https://clearviewinsurance.com" target="_blank" rel="noopener">clearviewinsurance.com</a></span>
     <!-- Optional: add your TX license number below once issued. Not required —
          TX ad rules (28 TAC Subch. B) accept full licensed name OR license number
          for identification, and the name above covers it. The number just makes
