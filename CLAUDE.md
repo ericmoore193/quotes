@@ -39,8 +39,11 @@ EJ's agent CRM.
   inside the appropriate section's `<div class="grid">`, edit the
   icon/title/description/href.
 - **Colors/branding**: CSS variables at the top of the `<style>` block
-  (`--navy`, `--accent`, etc.). If EJ gets official Clearview brand colors or a
-  logo, apply them there / in the header.
+  (`--navy`, `--accent`, etc.). Current values are the Clearview brand colors
+  sampled from clearviewinsurance.com and its logo (navy `#073252`, blue
+  `#0174aa`, gold `#fcc440` — gold is for small accents only). If the agency
+  ever supplies an official style guide or logo file, reconcile against it
+  there / in the header.
 - **License number**: optional. Texas ad rules (28 TAC Subchapter B) require
   identifying the responsible party by full licensed name, registered assumed
   name, OR license number — the name in the footer already satisfies this.
