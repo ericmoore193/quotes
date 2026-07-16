@@ -30,14 +30,25 @@ Display name on the page is Eric “EJ” Moore (he goes by both — keep that
 format in the title, meta description, and footer). Form submissions land in
 EJ's agent CRM.
 
+## Page anatomy (top to bottom)
+
+Sticky utility bar (wordmark + phone) → flat navy masthead with EJ's
+"business card" panel overlapping into the next band → "What happens after
+you click" steps → Personal coverage (3 cards) → Business coverage (2×2) →
+"A note from EJ" → navy contact band → footer. Cards collapse to tappable
+list rows under 720px. A ~15-line inline script adds a scroll-reveal
+animation (JS-gated: with JS off or reduced motion on, everything is simply
+visible). No emoji anywhere — icons are hand-drawn inline SVGs (24×24,
+1.75 stroke, navy) with exactly one small gold detail each.
+
 ## How to make the common edits
 
-- **Swap a quote link**: edit the `href` on the relevant card's button. Keep
-  `target="_blank" rel="noopener"` and preserve the `agent_name=Eric` tag so
-  submissions credit EJ.
+- **Swap a quote link**: edit the `href` on the relevant card's
+  `<a class="cta">`. Keep `target="_blank" rel="noopener"` and preserve the
+  `agent_name=Eric` tag so submissions credit EJ.
 - **Add a coverage type**: copy an entire `<div class="card">...</div>` block
-  inside the appropriate section's `<div class="grid">`, edit the
-  icon/title/description/href.
+  inside the appropriate section's grid, edit the SVG icon/title/description/
+  href, and give it the next `--i` value for the reveal stagger.
 - **Colors/branding**: CSS variables at the top of the `<style>` block
   (`--navy`, `--accent`, etc.). Current values are the Clearview brand colors
   sampled from clearviewinsurance.com and its logo (navy `#073252`, blue
