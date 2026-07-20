@@ -32,14 +32,17 @@ EJ's agent CRM.
 
 ## Page anatomy (top to bottom)
 
-Sticky utility bar (wordmark + phone) → flat navy masthead with EJ's
-"business card" panel overlapping into the next band → "What happens after
-you click" steps → Personal coverage (3 cards) → Business coverage (2×2) →
-"A note from EJ" → navy contact band → footer. Cards collapse to tappable
-list rows under 720px. A ~15-line inline script adds a scroll-reveal
-animation (JS-gated: with JS off or reduced motion on, everything is simply
-visible). No emoji anywhere — icons are hand-drawn inline SVGs (24×24,
-1.75 stroke, navy) with exactly one small gold detail each.
+Sticky utility bar (wordmark + phone) → flat navy masthead containing EJ's
+"business card" panel (kept fully inside the navy band — EJ dislikes
+overlap effects) → "What happens after you pick one" steps → Personal
+coverage (3 cards) → Business coverage (2×2) → "A note from EJ" → navy
+contact band → footer. Cards collapse to tappable list rows under 900px.
+A ~15-line inline script adds a scroll-reveal animation on the coverage
+cards only (JS-gated: with JS off or reduced motion on, everything is
+simply visible). No emoji anywhere — icons are hand-drawn inline SVGs
+(24×24, 1.75 stroke, navy) with exactly one small gold detail each.
+No em dashes in any user-visible text (title, meta, or page copy) — EJ's
+explicit preference; use commas or restructure the sentence instead.
 
 ## How to make the common edits
 
