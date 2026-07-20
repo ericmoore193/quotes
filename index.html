@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request a Quote | Eric “EJ” Moore — Clearview Insurance Agency</title>
+<title>Request a Quote | Eric “EJ” Moore, Clearview Insurance Agency</title>
 <meta name="description" content="Request an insurance quote from Eric “EJ” Moore at Clearview Insurance Agency in Cedar Park, TX. Auto, home, life, and business coverage through an independent agency licensed in 40 states.">
 <meta name="theme-color" content="#073252">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Request a Quote | Eric “EJ” Moore — Clearview Insurance Agency">
+<meta property="og:title" content="Request a Quote | Eric “EJ” Moore, Clearview Insurance Agency">
 <meta property="og:description" content="Auto, home, life, and business insurance quotes through Clearview Insurance Agency in Cedar Park, TX. Pick a coverage type and EJ takes it from there.">
 <meta property="og:url" content="https://ericmoore193.github.io/quotes/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23073252'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23ffffff'%3EEJ%3C/text%3E%3Crect x='18' y='48' width='28' height='4' rx='2' fill='%23fcc440'/%3E%3C/svg%3E">
@@ -114,14 +114,15 @@
     display: grid;
     grid-template-columns: 7fr 5fr;
     gap: 48px;
-    padding-top: 64px;
+    padding: 64px 0 56px;
+    align-items: center;
   }
-  .hero-text { padding-bottom: 40px; }
   .eyebrow {
     font-size: 12px; font-weight: 600;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold);
   }
+  .nowrap { white-space: nowrap; }
   h1 {
     font-family: var(--serif);
     font-size: clamp(34px, 5.5vw, 50px);
@@ -139,15 +140,12 @@
     margin-top: 16px;
   }
 
-  /* The business card — overlaps the gold rule into the steps band */
+  /* The business card, contained inside the navy masthead */
   .agent-card {
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 12px 32px rgba(7, 50, 82, 0.18);
     padding: 24px;
-    align-self: end;
-    position: relative;
-    margin-bottom: -56px;
   }
   .identity { display: flex; align-items: center; gap: 14px; }
   .avatar {
@@ -193,7 +191,7 @@
   .steps-band {
     background: #fff;
     border-bottom: 1px solid var(--hairline);
-    padding: 88px 0 48px;
+    padding: 56px 0 48px;
   }
   .steps-band h2 {
     font-family: var(--serif);
@@ -345,10 +343,8 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; gap: 0; padding-top: 48px; }
-    .hero-text { padding-bottom: 32px; }
-    .agent-card { margin-bottom: -40px; }
-    .steps-band { padding: 64px 0 36px; }
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 48px 0 40px; }
+    .steps-band { padding: 48px 0 36px; }
     .steps { grid-template-columns: 1fr; gap: 16px; }
     .step { padding: 0; display: flex; gap: 16px; align-items: flex-start; }
     .step + .step { border-left: none; }
@@ -406,14 +402,14 @@
 </header>
 
 <!-- ============================================================
-     MASTHEAD — flat navy, gold rule, overlapping business card
+     MASTHEAD: flat navy, gold rule, EJ's business card
      ============================================================ -->
 <section class="masthead">
   <div class="wrap hero">
     <div class="hero-text">
-      <p class="eyebrow">Independent Insurance Agency &middot;&nbsp;Cedar Park, Texas</p>
+      <p class="eyebrow">Independent Insurance Agency <span class="nowrap">&middot; Cedar Park, Texas</span></p>
       <h1>Let&rsquo;s find you the right&nbsp;coverage.</h1>
-      <p class="hero-sub">I&rsquo;m EJ Moore with Clearview Insurance. Pick a coverage type below, answer a few quick questions, and I&rsquo;ll shop your request across our carriers and follow up personally &mdash; usually the same day.</p>
+      <p class="hero-sub">I&rsquo;m EJ Moore with Clearview Insurance. Pick a coverage type below, answer a few quick questions, and I&rsquo;ll shop your request across our carriers and follow up personally, usually the same day.</p>
     </div>
     <div class="agent-card">
       <div class="identity">
@@ -424,7 +420,7 @@
         </div>
       </div>
       <hr>
-      <p class="reassure">Your quote request comes straight to me &mdash; not a call center.</p>
+      <p class="reassure">Your quote request comes straight to me, not a call center.</p>
       <div class="agent-actions">
         <div class="btn-row">
           <a class="btn btn-solid" href="tel:+15127291108">
@@ -624,7 +620,7 @@
         <span class="avatar avatar-sm" aria-hidden="true">EJ</span>
         <div class="note-text">
           <p>Insurance is one of those things you buy hoping you'll never need it. My job is to help you understand exactly what you're buying, so there are no surprises later. Send a quote request through, or just call. Either way, you'll get a person, not a queue.</p>
-          <p class="signoff">&mdash; Eric “EJ” Moore</p>
+          <p class="signoff">Eric “EJ” Moore</p>
         </div>
       </div>
     </section>
