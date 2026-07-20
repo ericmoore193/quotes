@@ -13,9 +13,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23073252'/%3E%3Ctext x='32' y='41' font-family='Georgia,serif' font-size='28' font-weight='700' text-anchor='middle' fill='%23ffffff'%3EEJ%3C/text%3E%3Crect x='18' y='48' width='28' height='4' rx='2' fill='%23fcc440'/%3E%3C/svg%3E">
 <style>
   /* ============================================================
-     DESIGN TOKENS — Clearview brand colors sampled from
+     DESIGN TOKENS: Clearview brand colors sampled from
      clearviewinsurance.com + logo: navy #073252, blue #0174aa,
-     gold #fcc440 (gold = small accents only, never text on white)
+     gold #fcc440 (small accents only, never text on white)
      ============================================================ */
   :root {
     --navy: #073252;
@@ -114,7 +114,8 @@
     display: grid;
     grid-template-columns: 7fr 5fr;
     gap: 48px;
-    padding: 64px 0 56px;
+    padding-top: 64px;
+    padding-bottom: 56px;
     align-items: center;
   }
   .eyebrow {
@@ -343,7 +344,7 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; gap: 28px; padding: 48px 0 40px; }
+    .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 48px; padding-bottom: 40px; }
     .steps-band { padding: 48px 0 36px; }
     .steps { grid-template-columns: 1fr; gap: 16px; }
     .step { padding: 0; display: flex; gap: 16px; align-items: flex-start; }
@@ -385,7 +386,7 @@
 <a class="skip" href="#main">Skip to coverage options</a>
 
 <!-- ============================================================
-     STICKY UTILITY BAR — wordmark + phone
+     STICKY UTILITY BAR: wordmark + phone
      ============================================================ -->
 <header class="bar">
   <div class="wrap bar-inner">
@@ -444,7 +445,7 @@
 <main id="main">
 
   <!-- ============================================================
-       STEPS BAND — what happens after you click
+       STEPS BAND: what happens after you pick one
        ============================================================ -->
   <div class="steps-band">
     <div class="wrap">
@@ -660,10 +661,10 @@
     <span>Eric “EJ” Moore &middot; Clearview Insurance Agency LLC &middot; Cedar Park, Texas</span>
     <span>An independent agency headquartered in Uniondale, NY, serving clients in 40 states.</span>
     <span>Agency website: <a href="https://clearviewinsurance.com" target="_blank" rel="noopener">clearviewinsurance.com</a></span>
-    <!-- Optional: add your TX license number below once issued. Not required —
+    <!-- Optional: add your TX license number below once issued. Not required:
          TX ad rules (28 TAC Subch. B) accept full licensed name OR license number
          for identification, and the name above covers it. The number just makes
-         you verifiable on TDI's license lookup — a nice trust signal. -->
+         you verifiable on TDI's license lookup, a nice trust signal. -->
     <span id="license-line"></span>
   </div>
 </footer>
